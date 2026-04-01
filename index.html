@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>佐藤先生の身法用語解説 - Biomechanics Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fcfbf7;
+            --accent-blue: #2563eb;
+            --accent-emerald: #10b981;
+            --text-main: #1a202c;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        .title-serif {
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 900;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .title-sub {
+            letter-spacing: 0.2em;
+            font-weight: 800;
+            color: #4a5568;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
+        }
+
+        .track-active {
+            border-left: 4px solid var(--accent-blue);
+            background: #eff6ff;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <div class="max-w-2xl mx-auto px-4 py-8 md:py-12">
+        
+        <nav class="mb-8 fade-in">
+            <a href="https://yoshi0213saku-spec.github.io/deji-sogouannai01/" class="inline-flex items-center space-x-2 text-gray-400 hover:text-blue-600 transition-colors duration-300 group">
+                <div class="w-8 h-8 rounded-full bg-white border border-gray-100 flex items-center justify-center shadow-sm group-hover:border-blue-100 group-hover:bg-blue-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </div>
+                <span class="text-xs font-bold tracking-widest uppercase">総合案内に戻る</span>
+            </a>
+        </nav>
+
+        <header class="text-center mb-12 fade-in">
+            <div class="inline-flex items-center space-x-2 bg-blue-50 px-4 py-1.5 rounded-full mb-6">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                <span class="text-[10px] font-black text-blue-600 tracking-[0.15em] uppercase">AI Biomechanics Lab v2.0</span>
+            </div>
+            
+            <div class="space-y-3">
+                <p class="text-xs md:text-base title-sub uppercase text-blue-500 font-bold">身法講義アーカイブ</p>
+                <h1 class="text-2xl md:text-4xl text-gray-900 title-serif">
+                    佐藤先生の <br class="md:hidden"> <span class="text-blue-600">「身法用語解説」</span>
+                </h1>
+            </div>
+        </header>
+
+        <div class="space-y-8 fade-in">
+            <!-- アーカイブセクション（メインプレイヤー） -->
+            <div class="glass-card rounded-3xl p-8 border border-gray-100 shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Oral Archive</span>
+                    <span id="playing-indicator" class="text-[10px] text-gray-400 font-medium">待機中...</span>
+                </div>
+                
+                <audio id="main-audio" controls class="w-full h-10 mb-8 focus:outline-none">
+                    お使いのブラウザはオーディオ再生に対応していません。
+                </audio>
+
+                <div class="space-y-4" id="playlist">
+                    <!-- 解説データ -->
+                    <div onclick="playTrack('talk-sato-yougo202604.mp3', '佐藤先生の身法用語解説', '太極拳における身体操作の専門用語を、バイオメカニクスの視点を交えて詳しく紐解きます。', this)" 
+                         class="group cursor-pointer p-5 rounded-2xl border border-gray-100 hover:border-blue-200 hover:bg-white transition-all duration-300">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-gray-800 tracking-tight">佐藤先生の身法用語解説</h4>
+                                    <p class="text-[10px] text-gray-400 uppercase mt-1">File: talk-sato-yougo202604.mp3</p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-blue-400 font-bold">01</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- キュレーター紹介 -->
+            <div class="glass-card rounded-3xl p-10 text-center mt-12 border border-gray-100 shadow-sm">
+                <p class="text-[10px] text-gray-400 uppercase tracking-[0.4em] mb-6 font-bold">Authorized Curator</p>
+                <div class="relative w-32 h-24 mx-auto mb-6 flex items-center justify-center overflow-hidden rounded-xl bg-gray-50 border border-gray-100 shadow-inner">
+                    <img src="./aikon-sita.png" alt="デジタル資料館" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/128x96?text=No+Image'">
+                </div>
+                <h4 class="text-xl font-bold text-gray-900 mb-1">中島 義健</h4>
+                <p class="text-sm text-blue-600 font-bold mb-4">日本武術太極拳連盟 会員</p>
+                <a href="mailto:yoshi0213@gmail.com" class="text-xs text-gray-400 font-mono bg-gray-50 py-2 rounded-lg inline-block px-4 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300">
+                    yoshi0213@gmail.com
+                </a>
+            </div>
+        </div>
+
+        <footer class="mt-20 text-center text-gray-400 text-[10px] tracking-[0.5em] uppercase font-bold">
+            &copy; 2024 AI TaiChi Biomechanics Digital Archive
+        </footer>
+    </div>
+
+    <script>
+        function playTrack(url, title, insight, element) {
+            const audio = document.getElementById('main-audio');
+            const indicator = document.getElementById('playing-indicator');
+            document.querySelectorAll('#playlist > div').forEach(el => el.classList.remove('track-active', 'bg-white', 'shadow-md'));
+            element.classList.add('track-active', 'bg-white', 'shadow-md');
+            audio.src = url;
+            indicator.innerText = "読み込み中...";
+            audio.play().then(() => {
+                indicator.innerText = "再生中: " + title;
+            }).catch(error => {
+                indicator.innerHTML = '<span class="text-red-500 font-bold">再生失敗</span>';
+            });
+        }
+    </script>
+</body>
+</html>
